@@ -123,6 +123,7 @@ module.exports = (req, res) => {
 
             let userSub = await Subscribers.findOne({ where: { target: event.sender.id, type: "messenger" } })
             let mode = event.optin.title.includes("midi") ? "midi" : "soir"
+            let modeEmote = mode == "midi" ? "☀️" : "🌙"
 
             if (userSub) {
               let data_midi = mode == "midi" ? { token_expiry_timestamp: event.optin.token_expiry_timestamp, notification_messages_token: event.optin.notification_messages_token, active: true } : userSub.data_midi ? userSub.data_midi : {}
@@ -131,7 +132,7 @@ module.exports = (req, res) => {
 
               await userSub.update({ active: true, data_soir, data_midi })
 
-              sendMessage(event.sender.id, "Bien reçu, vous recevrez désormais à nouveau le menu tous les jours quelques heures avant le repas du " + mode + " !")
+              sendMessage(event.sender.id, "Bien reçu, vous recevrez désormais à nouveau le menu tous les jours quelques heures avant le repas du " + mode + " ! " + modeEmote)
 
 
 
@@ -140,10 +141,11 @@ module.exports = (req, res) => {
               let data_soir = event.optin.title.includes("soir") ? { token_expiry_timestamp: event.optin.token_expiry_timestamp, notification_messages_token: event.optin.notification_messages_token, active: true } : {}
               await Subscribers.create({ type: 'messenger', target: event.sender.id, active: true, data_midi, data_soir })
 
-              sendMessage(event.sender.id, "Bien reçu, vous recevrez désormais le menu tous les jours quelques heures avant le repas du " + mode + " !")
+              sendMessage(event.sender.id, "Bien reçu, vous recevrez désormais le menu tous les jours quelques heures avant le repas du " + mode + " ! " + modeEmote)
             }
           } else if (event.optin.notification_messages_status == "STOP_NOTIFICATIONS") {
             let mode = event.optin.title.includes("midi") ? "midi" : "soir"
+            let modeEmote = mode == "midi" ? "☀️" : "🌙"
 
             let userSub = await Subscribers.findOne({ where: { target: event.sender.id, type: "messenger" } })
             let data_midi = mode == "midi" ? { active: false } : userSub.data_midi ? userSub.data_midi : {}
@@ -154,7 +156,7 @@ module.exports = (req, res) => {
 
             await userSub.update({ active: activeStatus, data_midi, data_soir })
 
-            sendMessage(event.sender.id, `Votre demande a bien été prise en compte et vous ne receverez désormais plus les menus du ${mode} du RAK. Vous pouvez toujours envoyer '${mode}' pour les demander manuellement. Pour se réinscrire envoyez 'sub'`)
+            sendMessage(event.sender.id, `Votre demande a bien été prise en compte et vous ne receverez désormais plus les menus du ${mode} ${modeEmote} du RAK. Vous pouvez toujours envoyer '${mode}' pour les demander manuellement. Pour se réinscrire envoyez 'sub'`)
           }
         }
 
