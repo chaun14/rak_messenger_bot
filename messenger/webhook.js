@@ -78,10 +78,24 @@ module.exports = (req, res) => {
               sendMessage(event.sender.id, message)
 
             }
-            else if (msg == "start") {
+            else if (msg == "start" || msg == "subscribe" || msg == "sub") {
 
               await sendSubscribeMessage(event.sender.id, "Recevoir les menus du midi du RAK")
               await sendSubscribeMessage(event.sender.id, "Recevoir les menus du soir du RAK")
+            }
+            else if (msg == 'stop' || msg == "subscribe" || msg == "sub") {
+              // first get the status of this member subscription
+              let userSub = await Subscribers.findOne({ where: { target: event.sender.id, type: "messenger" } })
+
+              if (userSub && userSub.active) {
+                let data_midi = userSub.data_midi ? userSub.data_midi : {}
+                let data_soir = userSub.data_soir ? userSub.data_soir : {}
+                await userSub.update({ active: false, data_soir, data_midi })
+                sendMessage(event.sender.id, "Vous ne recevrez plus les menus du RAK. Vous pouvez toujours envoyer 'start' pour vous réabonner.")
+              } else {
+                sendMessage(event.sender.id, "Vous n'êtes pas abonné aux notifications de menu. Envoyez 'start' pour vous abonner.")
+              }
+
             }
             else if (msg == "help") {
               let message = 'Voici la liste des commandes disponibles: \n\n"midi" pour obtenir le menu du midi \n"soir" pour obtenir le menu du soir \n"start" pour vous abonner aux notifications de menu\n"credits" Mais qui à fait ce bot? \n\nEnvoyez "help" pour obtenir la liste des commandes'
