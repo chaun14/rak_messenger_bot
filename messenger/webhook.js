@@ -98,7 +98,7 @@ module.exports = (req, res) => {
 
             }
             else if (msg == "help") {
-              let message = 'Voici la liste des commandes disponibles: \n\n"midi" pour obtenir le menu du midi \n"soir" pour obtenir le menu du soir \n"start" pour vous abonner aux notifications de menu\n"stop" pour vous désabonner aux notifications de menu\n"credits" Mais qui à fait ce bot? \n\nEnvoyez "help" pour obtenir la liste des commandes'
+              let message = 'Voici la liste des commandes disponibles: \n\n🔹"midi" pour obtenir le menu du midi \n🔹"soir" pour obtenir le menu du soir \n🔹"start" pour vous abonner aux notifications de menu\n🔹"stop" pour vous désabonner aux notifications de menu\n🔹"credits" Mais qui à fait ce bot? \n\nEnvoyez "help" pour obtenir la liste des commandes'
               sendMessage(event.sender.id, message)
 
             }
