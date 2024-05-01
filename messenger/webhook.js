@@ -30,7 +30,7 @@ module.exports = (req, res) => {
 
             }
             else if (msg == "credits") {
-              sendMessage(event.sender.id, "Ce bot a été développé par @roman_grry. Son code sources est disponible sur github :o\n\nhttps://www.facebook.com/profile.php?id=61550077430361\nhttps://github.com/chaun14/rak-bot")
+              sendMessage(event.sender.id, "Ce bot a été développé par @roman_grry. Son code sources est disponible sur github :o\n\nhttps://www.facebook.com/profile.php?id=61550077430361\nhttps://github.com/chaun14/rak_messenger_bot")
             }
             else if (msg == "midi") {
 
