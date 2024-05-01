@@ -1,0 +1,22 @@
+{
+  "name": "rak_messenger_bot",
+  "version": "1.0.0",
+  "description": "",
+  "author": "chaun14 <roman.guerry@gmail.com>",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "dayjs": "^1.11.10",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mysql2": "^3.9.7",
+    "node-cron": "^3.0.3",
+    "node-html-parser": "^6.1.13",
+    "rss-parser": "^3.13.0",
+    "sequelize": "^6.37.3",
+    "undici": "^6.12.0"
+  }
+}
