@@ -46,6 +46,8 @@ async function sendMessage(recipient, message, options) {
 
 
 async function sendSubscribeMessage(recipient, title) {
+
+
     console.log("sendSubscribeMessage to " + recipient)
 
 
@@ -78,9 +80,16 @@ async function sendSubscribeMessage(recipient, title) {
         });
         resJson = await res.json()
         console.log(resJson)
+        //     console.error(JSON.stringify(resJson))
+        if (resJson.error && resJson.error.error_user_title == "Duplicate Opt In Message") {
+            sendMessage(recipient, "⏳ Vous avez déjà recu récemment un message proposant de vos abonnez, scrollez un peu pour retrouver le bouton pour vous abonner au notification du midi ☀️ ou du soir 🌙")
+        }
         console.log(res.status + " " + res.statusText + " " + res.body && res.body.message ? res.body : "")
     } catch (error) {
         console.error(error)
+
+
+
     }
 
 
