@@ -23,6 +23,13 @@ module.exports = async () => {
                     repas: "Diner",
                 }
             });
+
+            if (!menus || !menus.length) {
+
+                console.log("No menu found for today's dinner")
+                return
+            }
+
             let message = "Repas du soir du RAK \n"
             for (let menu of menus) {
                 message = message + '\n' + menu.plat.content
