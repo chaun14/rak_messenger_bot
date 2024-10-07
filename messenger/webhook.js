@@ -80,8 +80,9 @@ module.exports = (req, res) => {
             }
             else if (msg == "start" || msg == "subscribe" || msg == "sub") {
 
-              await sendSubscribeMessage(event.sender.id, "Recevoir les menus du midi du RAK")
-              await sendSubscribeMessage(event.sender.id, "Recevoir les menus du soir du RAK")
+              await sendSubscribeMessage(event.sender.id, "Recevoir les menus du midi du RAK", { image_url: "https://c14.li/rakbot/rak_midi.jpeg" });
+              await sendSubscribeMessage(event.sender.id, "Recevoir les menus du soir du RAK", { image_url: "https://c14.li/rakbot/rak_soir.jpeg" });
+
             }
             else if (msg == 'stop' || msg == "subscribe" || msg == "sub") {
               // first get the status of this member subscription

@@ -45,7 +45,8 @@ async function sendMessage(recipient, message, options) {
 
 
 
-async function sendSubscribeMessage(recipient, title) {
+async function sendSubscribeMessage(recipient, title, options) {
+    if (!options) options = {}
 
 
     console.log("sendSubscribeMessage to " + recipient)
@@ -71,7 +72,7 @@ async function sendSubscribeMessage(recipient, title) {
                             notification_messages_cta_text: "SIGN_UP",
                             notification_messages_timezone: "Europe/Paris",
                             title: title,
-                            image_url: "https://hub.imt-atlantique.fr/rak/wp-content/uploads/2022/06/rak_batiment-1.jpg",
+                            image_url: options && options.image_url ? options.image_url : "https://hub.imt-atlantique.fr/rak/wp-content/uploads/2022/06/rak_batiment-1.jpg",
                             payload: "getRakMenus",
                         }
                     }
